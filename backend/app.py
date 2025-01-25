@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 # Initialize Firebase Admin SDK with your credentials
-cred = credentials.Certificate('uplife-4b5f9-firebase-adminsdk-fbsvc-e5aa016060.json')  
+cred = credentials.Certificate('your-own-firebase.json')  
 firebase_admin.initialize_app(cred)
 
 app = Flask(__name__)
