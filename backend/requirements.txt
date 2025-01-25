@@ -1,2 +1,7 @@
 flask
 python-dotenv
+numpy
+cmake
+dlib
+imutils
+Pillow
