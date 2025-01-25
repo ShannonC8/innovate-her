@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   font-family: 'Arial, sans-serif';
-  background-color: #fff0f5; /* Light pink background */
+  background-color: #fff0f5; 
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -18,8 +18,7 @@
 
 .App-title {
   font-size: 2.5rem;
-  color: #ff6f91; /* Pink coral color */
-  margin: 0;
+  color: #ff6f91; 
 }
 
 .App-subtitle {
@@ -51,6 +50,6 @@
 }
 
 .cta-button:hover {
-  background-color: #e05a78; /* Slightly darker pink */
+  background-color: #e05a78; 
   transform: scale(1.05);
 }
