@@ -6,7 +6,7 @@ import "./PeriodTracker.css";
 import { useUser } from "../UserContext";
 
 const PeriodTracker = ({ userEmail }) => {
-  const { userId } = useUser(); 
+  const { userId, userName } = useUser(); 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [notes, setNotes] = useState("");
   const [isOnPeriod, setIsOnPeriod] = useState(false);
@@ -17,6 +17,8 @@ const PeriodTracker = ({ userEmail }) => {
   useEffect(() => {
     const fetchEntries = async () => {
         try {
+          console.log(userId)
+          console.log(userName)
           if (!userId) return; 
           const formattedDate = selectedDate.toISOString().split("T")[0];
           const response = await axios.get(`http://127.0.0.1:5000/api/calendar-data?user_id=${userId}&date=${formattedDate}`);
@@ -62,8 +64,6 @@ const PeriodTracker = ({ userEmail }) => {
     }
   };
   
-
-
   return (
     <div className="period-tracker">
       <div className="tracker-container">

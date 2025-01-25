@@ -1,22 +1,25 @@
-// UserContext.js
 import React, { createContext, useState, useContext } from "react";
 
-// Create a Context for User
 const UserContext = createContext();
 
 export const useUser = () => {
-  return useContext(UserContext);  // Custom hook to access the user context
+  return useContext(UserContext);  
 };
 
 export const UserProvider = ({ children }) => {
-  const [userId, setUserId] = useState(null);  // State to store the user_id
-  
+  const [userId, setUserId] = useState(null);  
+  const [userName, setUserName] = useState(null);
+
+  const setName = (name) => {
+    setUserName(name)
+  }
+
   const setUser = (id) => {
     setUserId(id);
   };
 
   return (
-    <UserContext.Provider value={{ userId, setUser }}>
+    <UserContext.Provider value={{ userId, setUser, userName, setUserName }}>
       {children}
     </UserContext.Provider>
   );

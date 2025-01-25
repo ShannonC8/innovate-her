@@ -9,6 +9,7 @@ function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [userName, setUserName] = useState("")
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -20,6 +21,8 @@ function SignupPage() {
       setPassword(value);
     } else if (name === "confirmPassword") {
       setConfirmPassword(value);
+    } else if (name == "userName") {
+      setUserName(value);
     }
   };
 
@@ -37,6 +40,7 @@ function SignupPage() {
       const response = await axios.post("http://127.0.0.1:5000/api/signup", {
         email,
         password,
+        userName,
       });
       console.log(response.data); 
       navigate("/login");
@@ -53,6 +57,20 @@ function SignupPage() {
         <p className="signup-subtitle">Join FitHer for your health and fitness journey!</p>
         {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
+        <div className="input-container">
+            <label htmlFor="userName" className="input-label">Name</label>
+            <input
+              type="userName"
+              id="userName"
+              name="userName"
+              value={userName}
+              onChange={handleChange}
+              className="input-field"
+              placeholder="Enter your name"
+              required
+            />
+          </div>
+
           <div className="input-container">
             <label htmlFor="email" className="input-label">Email</label>
             <input

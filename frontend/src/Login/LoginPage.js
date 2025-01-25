@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const navigate = useNavigate();
-  const { userId, setUser } = useUser(); 
+  const { userId, setUser, setUserName } = useUser(); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -33,6 +33,7 @@ function LoginPage() {
       });
       console.log(response.data); 
       setUser(response.data.user_id);
+      setUserName(response.data.user_name);
       navigate("/calender");
     } catch (err) {
       console.error(err);

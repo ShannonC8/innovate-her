@@ -81,6 +81,7 @@ def login():
     data = request.get_json()
     email = data.get("email")
     password = data.get("password")
+    
 
     query = users_ref.where("email", "==", email).limit(1).get()
 
@@ -94,13 +95,14 @@ def login():
     # Check if the password matches
     if user_data["password"] != password:
         return jsonify({"error": "Invalid credentials"}), 401
-
+    userName = user_data["user_name"]
     user_id = user_data["user_id"]
 
     return jsonify({
         "message": "Login successful",
         "user_id": user_id,  
-        "email": email 
+        "email": email,
+        "user_name": userName,
     }), 200
 
 
@@ -110,6 +112,7 @@ def signup():
     data = request.get_json()
     email = data.get("email")
     password = data.get("password")
+    userName = data.get("userName")
 
     query = users_ref.where("email", "==", email).limit(1).get()
 
@@ -122,12 +125,14 @@ def signup():
     users_ref.document(user_id).set({
         "email": email,  # Store the email
         "password": password,  # Store the password
-        "user_id": user_id  # Store the user_id
+        "user_id": user_id,  # Store the user_id
+        "user_name": userName
     })
 
     return jsonify({
         "message": "Signup successful",
-        "user_id": user_id  
+        "user_id": user_id,
+        "user_name": userName,  
     }), 201
 
 
