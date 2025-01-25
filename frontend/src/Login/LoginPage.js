@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios"; 
+import { useUser} from "../UserContext"; 
 import './LoginPage.css'; 
+import { useNavigate } from "react-router-dom";
+
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const { userId, setUser } = useUser(); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -26,8 +31,9 @@ function LoginPage() {
         email,
         password,
       });
-      alert("Login successful!");
-      console.log(response.data); // Handle the backend response
+      console.log(response.data); 
+      setUser(response.data.user_id);
+      navigate("/calender");
     } catch (err) {
       console.error(err);
       setError("Failed to log in. Please check your credentials.");

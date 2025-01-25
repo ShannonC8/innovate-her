@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
 import axios from "axios"; 
 import './SignupPage.css'; 
+
 
 function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,8 +38,8 @@ function SignupPage() {
         email,
         password,
       });
-      alert("Signup successful!");
       console.log(response.data); 
+      navigate("/login");
     } catch (err) {
       console.error(err);
       setError("Failed to sign up. Please check your credentials.");

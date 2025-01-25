@@ -1,3 +1,29 @@
+# Node modules
+/node_modules/
+
+# Wrangler configuration files
+/.wrangler/
+
+# Build outputs
+/dist/
+/build/
+/public/
+
+# Cloudflare API tokens or sensitive information
+secrets.json
+
+# Debug and temporary files
+*.log
+*.bak
+*.swp
+*.swo
+
+# MacOS-specific files
+.DS_Store
+
+# Local configuration files
+/.cloudflare/
+
 # Node.js
 /frontend/node_modules/
 frontend/build/

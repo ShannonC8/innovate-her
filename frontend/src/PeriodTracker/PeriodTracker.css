@@ -1,0 +1,156 @@
+/* PeriodTracker.css */
+
+/* Base styling for the whole page */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Title styling */
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e91e63;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Main wrapper for the tracker */
+.tracker-container {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1100px;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Calendar styling */
+.calendar-wrapper {
+  width: 50%;
+}
+
+.react-calendar {
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.react-calendar__tile {
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Highlight the period days */
+.highlight-period {
+  background-color: #ff80b5 !important;
+  border-radius: 50%;
+  color: white;
+}
+
+/* Details card styling */
+.details-card {
+  width: 45%;
+  background-color: #fafafa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title of the card */
+.details-title {
+  font-size: 1.4rem;
+  color: #e91e63;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+/* Form input fields styling */
+.form-label {
+  display: block;
+  margin: 1rem 0 0.5rem;
+  color: #666;
+}
+
+input[type="checkbox"], input[type="range"], .note-input {
+  margin-top: 0.5rem;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+  background-color: #e91e63;
+  border-radius: 5px;
+  height: 8px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  background-color: #ff4b9b;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Notes text area */
+.note-input {
+  width: 100%;
+  height: 100px;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.note-input:focus {
+  border-color: #e91e63;
+  outline: none;
+}
+
+/* Save button styling */
+.save-button {
+  display: inline-block;
+  background-color: #e91e63;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 50px;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.save-button:hover {
+  background-color: #d81b60;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .tracker-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .calendar-wrapper, .details-card {
+    width: 100%;
+  }
+
+  .save-button {
+    width: 100%;
+  }
+}
