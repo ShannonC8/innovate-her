@@ -1,16 +1,17 @@
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LoginPage from "./Login/LoginPage"; 
+import "./App.css"; 
+import SignupPage from "./Signup/SignupPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="App-title">Welcome to FitHer</h1>
-        <p className="App-subtitle">
-          Your personalized companion for fitness, health, and wellness!
-        </p>
-        <button className="cta-button">Get Started</button>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+      </Routes>
+    </Router>
   );
 }
 

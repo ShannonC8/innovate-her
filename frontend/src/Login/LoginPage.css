@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffc0cb; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .login-container {
+    background-color: #fff0b3;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+  }
+  
+  .login-title {
+    font-size: 1.8em;
+    color: #ff66b2; 
+    margin-bottom: 15px;
+  }
+  
+  .login-subtitle {
+    font-size: 1.1em;
+    color: #ff66b2; 
+    margin-bottom: 20px;
+  }
+  
+  .input-container {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .input-label {
+    font-size: 1em;
+    color: #ff66b2; /* Pink label */
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ff66b2;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .submit-button {
+    background-color: #ff66b2; /* Pink */
+    color: #fff;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  .submit-button:hover {
+    background-color: #ff3399; /* Darker pink on hover */
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 1em;
+    margin-bottom: 15px;
+  }
+  
