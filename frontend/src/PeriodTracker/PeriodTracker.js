@@ -17,15 +17,17 @@ const PeriodTracker = ({ userEmail }) => {
   useEffect(() => {
     const fetchEntries = async () => {
         try {
-          if (!userId) return;  // Ensure userId is present
+          if (!userId) return; 
           const formattedDate = selectedDate.toISOString().split("T")[0];
-          const response = await axios.get(`/api/calendar-data?user_id=${userId}&date=${formattedDate}`);
+          const response = await axios.get(`http://127.0.0.1:5000/api/calendar-data?user_id=${userId}&date=${formattedDate}`);
           if (response.data) {
-            setNotes(response.data.notes || "");
-            setIsOnPeriod(response.data.isOnPeriod || false);
-            setMood(response.data.mood || 50);
-            setEnergy(response.data.energy || 50);
+            console.log("hi ", response.data[0].notes)
+            setNotes(response.data[0].notes || "");
+            setIsOnPeriod(response.data[0].isOnPeriod || false);
+            setMood(response.data[0].mood || 50);
+            setEnergy(response.data[0].energy || 50);
           }
+          console.log(response)
         } catch (error) {
           console.error("Error fetching entries:", error);
           setNotes("");
@@ -45,8 +47,9 @@ const PeriodTracker = ({ userEmail }) => {
 
   const handleSaveNote = async () => {
     const formattedDate = selectedDate.toISOString().split("T")[0];
+    console.log(userId)
     try {
-      await axios.post("/api/calendar-data", {
+      await axios.post("http://127.0.0.1:5000/api/calendar-data", {
         user_id: userId,  
         date: formattedDate,
         notes,
@@ -63,7 +66,6 @@ const PeriodTracker = ({ userEmail }) => {
 
   return (
     <div className="period-tracker">
-      <h1 className="title">Period Tracker</h1>
       <div className="tracker-container">
         <div className="calendar-wrapper">
           <Calendar 
