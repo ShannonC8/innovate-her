@@ -15,7 +15,7 @@
   transition: width 0.3s ease, background-color 0.3s ease;
 }
 
-/* Add a logo container */
+/* Add a logo container - Make it more specific */
 .sidebar .logo {
   width: 80%; /* Adjust width of logo */
   height: 60px; /* Set fixed height for the logo */
@@ -25,29 +25,34 @@
   align-items: center;
 }
 
-/* Styling for the logo image */
+/* Styling for the logo image - More specific to prevent override */
 .sidebar .logo img {
-  max-height: 100%;
+  max-height: 100%; /* Ensure the logo fits within the container */
   width: auto;
-  object-fit: contain;
+  object-fit: contain; /* Maintain aspect ratio */
+  display: block; /* Ensure image is block level */
+  margin: 0; /* Reset margin to avoid any inherited spacing */
 }
 
-/* Hover effect for sidebar */
+/* Hover effect for sidebar - More specific hover styles */
 .sidebar:hover {
   width: 12vw; /* Sidebar expands even more on hover */
   background-color: #3d2b61; /* Slightly darker purple */
 }
 
 /* Styling for the unordered list in the sidebar */
-.sidebar ul {
+.sidebar > ul {
   width: 100%;
   list-style-type: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Styling for each list item */
-.sidebar li {
+.sidebar > ul > li {
   width: 100%;
   margin: 25px 0;
   text-align: center; /* Center align links */
@@ -63,6 +68,7 @@
   padding: 12px 25px;
   display: block;
   transition: background-color 0.4s, color 0.4s, transform 0.3s;
+  text-align: center; /* Center text in links */
 }
 
 /* Hover effect for links */
@@ -74,7 +80,7 @@
 
 /* Active link styling */
 .sidebar a.active {
-  background-color: #6e4a8c; /* A more vibrant active link background */
+  background-color: #6e4a8c; /* More vibrant active link background */
   color: #e0e0e0; /* Light color for active link */
 }
 
@@ -86,7 +92,7 @@
 
 /* Content styling */
 .content {
-  margin-left: 250px; /* Content pushed to the right */
+  margin-left: 250px; /* Content pushed to the right of the sidebar */
   padding: 20px;
   width: 100%;
   transition: margin-left 0.3s ease;
