@@ -24,12 +24,13 @@
 .tracker-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: #fcadffcc; /* Slightly transparent pink background */
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
   max-width: 80vw;
-  width: 95%;
+  width: 100%;
   animation: slideIn 0.6s ease-out;
 }
 
@@ -57,11 +58,11 @@
 .react-calendar {
   width: 30vw;
   height:60vh;
-  margin: 5vh;
+  margin: 1vh;
   padding: 10px;
   font-size: 1.25rem;
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 6px 6px 15px rgba(47, 0, 60, 0.9);
 }
 
 .react-calendar__tile {
@@ -79,7 +80,7 @@
   background-color: #f7f7f7;
   border-radius: 10px;
   padding: 1rem;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 6px 6px 15px rgba(47, 0, 60, 0.9);
   animation: fadeInUp 1.3s ease-out;
   margin-left: 1rem;
 }
@@ -129,8 +130,6 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"].mood-slider {
   background: linear-gradient(90deg, #FF6AA8, #F1C6E9); /* Gradient: Soft pink to light lavender */
 }
-
-
 
 input[type="checkbox"] {
   padding: 1vw;
