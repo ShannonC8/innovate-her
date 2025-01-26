@@ -44,7 +44,7 @@ function LoginPage() {
   return (
     <div className="login-page">
       <div className="login-container">
-        <h2 className="login-title">Welcome to FitHer</h2>
+        <h2 className="login-title">Welcome to UpLift</h2>
         <p className="login-subtitle">Your personalized companion for fitness, health, and wellness!</p>
         {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
@@ -76,7 +76,7 @@ function LoginPage() {
             />
           </div>
 
-          <button type="submit" className="submit-button">
+          <button type="submit" id="submit-button">
             Login
           </button>
         </form>

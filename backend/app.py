@@ -259,7 +259,7 @@ def complete_string():
         )
 
         full_prompt = f"Context from recent calendar entries: {calendar_context}. User request: {user_input}"
-
+        
         response = groq_client.chat.completions.create(
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -270,7 +270,6 @@ def complete_string():
             max_completion_tokens=150,
             stream=False
         )
-
         # Process tasks 
         tasks_text = response.choices[0].message.content
 
