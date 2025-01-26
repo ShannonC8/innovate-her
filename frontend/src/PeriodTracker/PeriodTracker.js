@@ -81,7 +81,7 @@ const PeriodTracker = ({ userEmail }) => {
           <div className="card-content">
             <h2 className="details-title">Details for {selectedDate.toDateString()}</h2>
             <label className="form-label">
-              On Period:
+              On Period:  
               <input
                 type="checkbox"
                 checked={isOnPeriod}
@@ -96,6 +96,7 @@ const PeriodTracker = ({ userEmail }) => {
                 max="100"
                 value={mood}
                 onChange={(e) => setMood(Number(e.target.value))}
+                style={{backgroundColor: `rgb(val-50, val, val-20)`}}
               />
               <span>{mood}</span>
             </label>

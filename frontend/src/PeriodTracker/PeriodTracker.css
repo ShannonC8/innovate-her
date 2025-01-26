@@ -1,156 +1,230 @@
-/* PeriodTracker.css */
-
-/* Base styling for the whole page */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f8f8f8;
-  color: #333;
-  margin: 0;
-  padding: 0;
+/* Base styling */
+.period-tracker {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw;
+  margin: 0;
+  background-image: url('../images/lavender.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-/* Title styling */
 .title {
   font-size: 2rem;
+  color: #5A4B81;
   font-weight: bold;
-  color: #e91e63;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  animation: fadeInUp 1s ease-out;
 }
 
-/* Main wrapper for the tracker */
 .tracker-container {
   display: flex;
   justify-content: space-between;
-  width: 90%;
-  max-width: 1100px;
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffffcc; /* Slightly transparent white background */
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  max-width: 80vw;
+  width: 95%;
+  animation: slideIn 0.6s ease-out;
 }
 
-/* Calendar styling */
 .calendar-wrapper {
-  width: 50%;
+  flex: 1;
+  padding: 5px;
 }
 
 .react-calendar {
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 30vw;
+  height:60vh;
+  margin: 5vh;
+  padding: 10px;
+  font-size: 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .react-calendar__tile {
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.2s ease;
 }
 
-/* Highlight the period days */
 .highlight-period {
-  background-color: #ff80b5 !important;
-  border-radius: 50%;
+  background-color: #ff80b5;
   color: white;
+  border-radius: 50%;
 }
 
-/* Details card styling */
 .details-card {
-  width: 45%;
-  background-color: #fafafa;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1.3s ease-out;
+  margin-left: 1rem;
 }
 
-/* Title of the card */
 .details-title {
-  font-size: 1.4rem;
-  color: #e91e63;
-  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #5A4B81;
+  margin-bottom: 1.5rem;
   font-weight: bold;
 }
 
-/* Form input fields styling */
 .form-label {
-  display: block;
-  margin: 1rem 0 0.5rem;
-  color: #666;
+  padding:0.5vw;
+  display: block; /* Ensure labels are on their own lines */
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #5A4B81;
 }
 
-input[type="checkbox"], input[type="range"], .note-input {
+input[type="checkbox"],
+input[type="range"] {
+  margin-left: 0.5rem;
   margin-top: 0.5rem;
 }
 
+input[type="range"] {
+  width: 100%;
+  height: 10px; /* Slightly thicker range slider */
+  border-radius: 8px;
+  background-color: #e0e0e0; /* Soft background for the track */
+  margin-top: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #9C71E5; /* Soft lilac for the thumb */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Mood slider styling */
+input[type="range"].mood-slider {
+  background: linear-gradient(90deg, #FF6AA8, #F1C6E9); /* Gradient: Soft pink to light lavender */
+}
+
+
+
 input[type="checkbox"] {
+  padding: 1vw;
   transform: scale(1.2);
 }
 
 input[type="range"] {
   width: 100%;
-  cursor: pointer;
-  background-color: #e91e63;
-  border-radius: 5px;
+  border-radius: 6px;
   height: 8px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
-  background-color: #ff4b9b;
-  border-radius: 50%;
-  height: 20px;
   width: 20px;
+  height: 20px;
+  border-radius: 50%;
   border: none;
   cursor: pointer;
 }
 
-/* Notes text area */
+/* Specific styles for Mood slider */
+input[type="range"].mood-slider {
+  background: linear-gradient(90deg, #FFD1DC, #D4F8E8); /* Pink to Mint gradient */
+}
+
+input[type="range"].mood-slider::-webkit-slider-thumb {
+  background-color: #FF80B5; /* Soft Pink */
+}
+
+/* Specific styles for Energy slider */
+input[type="range"].energy-slider {
+  background: linear-gradient(90deg, #D4F8E8, #5A4B81); /* Mint to Dusty Purple gradient */
+}
+
+input[type="range"].energy-slider::-webkit-slider-thumb {
+  background-color: #6FD3C4; /* Mint Green */
+}
+
 .note-input {
   width: 100%;
-  height: 100px;
-  margin-top: 1rem;
   padding: 1rem;
-  border: 1px solid #ddd;
+  height: 100px;
   border-radius: 8px;
-  font-size: 0.95rem;
-  color: #666;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  margin-top: 1rem;
 }
 
 .note-input:focus {
-  border-color: #e91e63;
+  border-color: #6FD3C4;
   outline: none;
 }
 
-/* Save button styling */
 .save-button {
-  display: inline-block;
-  background-color: #e91e63;
-  color: #fff;
-  font-size: 1rem;
+  background-color: #D4F8E8;
+  color: #5A4B81;
   padding: 0.75rem 2rem;
   border: none;
   border-radius: 50px;
-  margin-top: 1.5rem;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  margin-top: 1rem;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .save-button:hover {
-  background-color: #d81b60;
+  background-color: #6FD3C4;
+  transform: scale(1.05);
 }
 
-/* Responsive styling */
 @media (max-width: 768px) {
   .tracker-container {
     flex-direction: column;
     align-items: center;
+    padding: 1rem;
   }
 
   .calendar-wrapper, .details-card {
     width: 100%;
+    margin-left: 0;
   }
 
   .save-button {
     width: 100%;
   }
 }
+
+/* Keyframe animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+ 
+
+
