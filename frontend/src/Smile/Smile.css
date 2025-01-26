@@ -1,0 +1,90 @@
+/* General Page Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Center the whole content in the middle of the page */
+  .smile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* Full height of the screen */
+    width: 100vw;
+    background: linear-gradient(to right, #FFC0CB, #FFB6C1); /* Soft pink gradient */
+    text-align: center;
+    color: #333;
+    padding: 2vw;  /* Decreased padding to reduce spacing */
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent overflow */
+  }
+  
+  /* Text section, adjusts space between text elements */
+  .text-section {
+    margin-bottom: 2vh;  /* Decrease bottom margin */
+    padding: 0 3vw;  /* Adjusted to smaller padding */
+    max-width: 85%;  /* Keep text width reasonable */
+  }
+  
+  /* Main title, scaled down */
+  .main-title {
+    font-size: 2vw;  /* Decreased font size */
+    font-weight: 700;
+    color: #d93f42;
+    margin-bottom: 1.5vh;  /* Decreased margin */
+    word-wrap: break-word;
+  }
+  
+  /* Motivational text, decreased font size */
+  .motivational-text {
+    font-size: 1vw;  /* Decreased font size */
+    color: #555;
+    margin-bottom: 4vh;  /* Decreased bottom margin */
+    font-style: italic;
+    max-width: 75%;  /* Reduced max-width for text to prevent it from stretching too far */
+  }
+  
+  /* Subheading text size */
+  .subheading {
+    font-size: 2.5vw;  /* Reduced font size */
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2.5vh;  /* Adjusted margin */
+  }
+  
+  /* Video section, smaller than before */
+  .video-feed {
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    max-width: 40vw;  /* Reduce max width of video to make it smaller */
+    height: auto;
+    transition: all 0.3s ease;
+  }
+  
+  .video-feed:hover {
+    transform: scale(1.05);
+  }
+  
+  .video-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3vh;  /* Adjusted space below the video */
+  }
+  
+  /* Footer, adjusted text size */
+  .footer {
+    position: absolute;
+    bottom: 5vh;  /* Bottom space adjusted */
+  }
+  
+  .footer-text {
+    top: 1vh;
+    font-size: 2vw;  /* Decreased font size */
+    color: #811949;
+    font-weight: 600;
+    font-weight: 300;
+  }
+  

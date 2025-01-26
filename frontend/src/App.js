@@ -5,6 +5,7 @@ import "./App.css";
 import SignupPage from "./Signup/SignupPage";
 import PeriodTracker from "./PeriodTracker/PeriodTracker"
 import { UserProvider } from "./UserContext";
+import Smile from "./Smile/Smile"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/calender" element={<PeriodTracker/>} />
+          <Route path="/smile" element={<Smile/>} />
         </Routes>
       </Router>
     </UserProvider>

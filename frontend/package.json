@@ -8,6 +8,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cra-template": "1.2.0",
+    "opencv.js": "^1.2.1",
     "react": "^18.0.0",
     "react-calendar": "^5.1.0",
     "react-dom": "^18.0.0",

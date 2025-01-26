@@ -3,6 +3,24 @@ from firebase_admin import credentials, auth, firestore
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import uuid
+import cv2 as cv
+import dlib
+import numpy as np
+from imutils import face_utils
+from numpy.linalg import norm
+from time import time
+import base64
+import cv2 as cv
+import dlib
+import numpy as np
+from imutils import face_utils
+from flask import Flask, Response
+import time
+
+detector = dlib.get_frontal_face_detector()
+predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
+
+from numpy.linalg import norm
 
 # Initialize Firebase Admin SDK with your credentials
 cred = credentials.Certificate('uplife-4b5f9-firebase-adminsdk-fbsvc-e5aa016060.json')  
@@ -134,6 +152,70 @@ def signup():
         "user_id": user_id,
         "user_name": userName,  
     }), 201
+
+
+# Helper function to calculate distances
+def gen_frames():
+    cap = cv.VideoCapture(0)  # Access webcam
+
+    while True:
+        ret, image = cap.read()
+        if not ret:
+            break
+
+        gray_image = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+        faces = detector(gray_image, 0)
+
+        for face in faces:
+            landmarks = predictor(gray_image, face)
+            landmarks = face_utils.shape_to_np(landmarks)
+
+            # Extracting relevant facial regions for smile detection
+            jaw_width = norm(landmarks[2] - landmarks[14])
+            lips_width = norm(landmarks[54] - landmarks[48])
+
+            lip_jaw_ratio = lips_width / jaw_width
+            mouth_opening = norm(landmarks[57] - landmarks[51])
+            mouth_nose = norm(landmarks[33] - landmarks[51])
+
+            # Smile detection logic
+            if lip_jaw_ratio > 0.44:
+                if mouth_opening / mouth_nose >= 1.05:
+                    # Apply a better text style with outline
+                    text = 'Smiling!'
+                    font = cv.FONT_HERSHEY_COMPLEX
+                    scale = 1.5
+                    color = (0, 255, 0)  # Green color
+                    thickness = 3
+                    
+                    (w, h), _ = cv.getTextSize(text, font, scale, thickness)
+                    x, y = face.left(), face.top() - 20
+                    
+                    # Outline the text
+                    cv.putText(image, text, (x-2, y-2), font, scale, (0, 0, 0), thickness + 2)
+                    cv.putText(image, text, (x, y), font, scale, color, thickness)
+
+            # Draw mouth polygon on the image with smoother polyline
+            mouth_landmarks = landmarks[48:60]
+            mouth_poly = np.array(mouth_landmarks, np.int32)
+            mouth_poly = mouth_poly.reshape((-1, 1, 2))
+
+            # Drawing the mouth with thicker and smoother edges
+            cv.polylines(image, [mouth_poly], True, (255, 0, 0), 3)  # Red color
+            cv.fillPoly(image, [mouth_poly], (255, 255, 255))  # White fill for polish
+
+        # Encode frame as JPEG and send to the frontend
+        ret, buffer = cv.imencode('.jpg', image)
+        if not ret:
+            continue
+        frame = buffer.tobytes()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(gen_frames(),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == "__main__":
