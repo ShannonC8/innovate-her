@@ -1,0 +1,89 @@
+/* Overall layout for the page */
+.questionnaire-page {
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  /* Container for the questionnaire */
+  .questionnaire-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  /* Title of the questionnaire */
+  .questionnaire-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #3e2a47;
+  }
+  
+  /* Styles for individual question card */
+  .question-card {
+    margin-bottom: 20px;
+    width: 20vw;
+  }
+  
+  /* Style for the text area for free response */
+  textarea {
+    width: 100%;
+    padding: 0.5vh;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    height: 100px;
+  }
+  
+  /* Style for radio buttons */
+  .options .option {
+    display: block;
+    margin: 10px 0;
+  }
+  
+  .options input {
+    margin-right: 10px;
+  }
+  
+  /* Buttons for Next, Previous and Submit */
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #5a4b81;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #4e3c70;
+    transform: scale(1.05);
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* When questionnaire is completed */
+  .completion-message {
+    text-align: center;
+    font-size: 18px;
+    color: #3e2a47;
+    padding: 20px;
+  }
+  
