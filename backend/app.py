@@ -236,7 +236,7 @@ def complete_string():
         return jsonify({"error": "Input string and userId are required"}), 400
 
     try:
-        calendar_query = db.collection("calendarData").where("user_id", "==", user_id).limit(3)
+        calendar_query = db.collection("calendarData").where("user_id", "==", user_id).limit(2)
         calendar_docs = list(calendar_query.get())
         
         # Retrieve user's additional info (like "other_info")
@@ -257,24 +257,46 @@ def complete_string():
     
         # Modify prompt based on calendar context availability
         system_prompt = (
-            "You are a planner generating personalized tasks. Format as title:description+title:description+title:description. Make the description a short sentence and do not write anything else."
-            + ("Use the user's recent calendar context to create relevant todo items. " if calendar_docs else "")
+            "You are a planner generating personalized tasks. Format as title:description+title:description+title:description. "
+            + ("This is user calender info: " if calendar_context else "")
             + "Use the user's additional context: " + other_info + " "
-            + "Generate exactly three tasks, formatted as title:description+title:description+title:description. Make the description a short sentence and do not write anything else."
+            + "Generate exactly three tasks, formatted as title:description+title:description+title:description. Make the description a short sentence."
         )
 
-        full_prompt = f"Context from recent calendar entries: {calendar_context}. User request: {user_input}"
+        full_prompt = f"User request: {user_input}"
         
         response = groq_client.chat.completions.create(
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": full_prompt},
+               
             ],
             model="llama-3.3-70b-versatile",
             temperature=0.9,
             max_completion_tokens=150,
             stream=False
         )
+        
+        # You can ask the AI again to format it for you precisely in the desired structure
+        system_prompt_ensure_format = (
+            "Please ensure the following tasks are formatted in this exact structure, do not add anything else other than the formatted text. The text will be a title and desicription of three things and you need to seperate them into the given format: "
+            "title:description+title:description+title:description. "
+        )
+
+        full_prompt_ensure_format = f"{response}"
+
+        response = groq_client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": system_prompt_ensure_format},
+                {"role": "user", "content": full_prompt_ensure_format},
+            ],
+            model="llama-3.3-70b-versatile",
+            temperature=0.9,
+            max_completion_tokens=150,
+            stream=False
+        )
+        
+
         # Process tasks 
         tasks_text = response.choices[0].message.content
 
@@ -284,9 +306,10 @@ def complete_string():
         for task in tasks:
             if ':' in task:
                 title, description = task.split(":", 1)
+                description = description.replace(":", ":")
                 formatted_tasks.append({
                     'title': title.strip(),
-                    'description': description.strip().replace(":","")
+                    'description': description.strip()
                 })
 
         return jsonify({
@@ -359,7 +382,7 @@ def generate_quote():
         system_prompt = (
             "Generate a short, positive, and uplifting quote that motivates the user to have a great day. "
             + (f"User's additional context: {other_info}" if other_info else "")
-            +"Make sure the quote is very short. "
+            + "make sure the quote is really short: no longer than 8 words."
         )
 
         # Generate the quote using the Groq API
