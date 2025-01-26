@@ -1,0 +1,130 @@
+/* General Page Styles */
+.mainbackground {
+  background-image: url('./homepage3.jpg');
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center; /* Centers everything horizontally */
+  align-items: center; /* Centers everything vertically */
+  height: 100vh; /* Ensure it takes up the full viewport height */
+  flex-direction: column;
+  text-align: center;
+  color: black; /* Ensures the text is readable on top of the background */
+  padding: 20px; /* Add padding to the sides */
+  box-sizing: border-box; /* Include padding in the element's total width */
+}
+
+/* Title Container */
+.title-container {
+  background-color: #FFD1DC;
+  padding: 30px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5); /* Larger and more noticeable shadow */
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  border: 5px solid #5a4b81; /* Title container border */
+}
+
+
+/* Welcome Text Styling */
+.mainbackground h1 {
+  font-size: 3.5rem; /* Larger font size for the main heading */
+  font-weight: 700;
+  margin: 0; /* Remove margin to avoid extra space */
+  letter-spacing: 2px; /* Add some spacing between letters for a clean look */
+}
+
+/* Slogan Styling */
+.mainbackground .slogan {
+  font-size: 1.8rem; /* Slogan font size */
+  font-weight: 700; /* Make the slogan text bold */
+  margin-bottom: 40px; /* Adds space between slogan and buttons */
+  opacity: 0.9; /* Slight transparency for a soft touch */
+  letter-spacing: 1px; /* Space between letters for clarity */
+}
+
+/* Wellness Text Styling (New Block) */
+.mainbackground .wellness-text {
+  font-size: 1.6rem; /* Slightly smaller font size than the slogan */
+  font-weight: 600; /* Semi-bold font */
+  margin-top: 20px; /* Adds space between the slogan and "wellness for everyone" */
+  opacity: 0.9; /* Slight transparency for a soft touch */
+  letter-spacing: 1.2px; /* Space between letters for clarity */
+  color: #05957a; /* Matching color to the uplifting container */
+}
+
+/* Button Container Styling */
+.button-container {
+  position: absolute;
+  bottom: 70px; /* Position at the bottom */
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  gap: 0.1em; /* Add space between buttons */
+}
+
+/* Button Styling */
+.button-container .btn {
+  background-color: #05957a;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 20px; /* Rounded shape */
+  cursor: pointer;
+  width: 100%; /* Makes buttons the same width */
+  max-width: 200px; /* Max width ensures buttons stay uniform */
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.button-container .btn:hover {
+  background-color: #903aa0;
+  transform: translateY(-5px);
+}
+
+/* Uplifting Text Container (Large Box) */
+.uplifting-container {
+  display: flex;
+  flex-direction: column; /* Stack text vertically */
+  justify-content: center; /* Centers text inside */
+  align-items: center; /* Aligns text horizontally in the center */
+  background-color: white; /* White background */
+  color: #05957a; /* Text color */
+  font-style: border-block;
+  padding: 40px 60px; /* Larger padding for the large box */
+  border-radius: 50px; /* Rounded corners */
+  font-size: 3rem; /* Larger font size */
+  font-weight: 700; /* Bold font */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Larger shadow for more depth */
+  width: 80%; /* Takes up most of the screen */
+  max-width: 900px; /* Limit maximum width */
+  height: 80%; /* Takes up 80% of the viewport height */
+  text-align: center;
+}
+
+/* Styling for the slogan inside the big box */
+.uplifting-container .slogan {
+  font-size: 2rem; /* Larger slogan font size */
+  font-weight: 700; /* Make the slogan text bold */
+  margin-top: 20px; /* Adds space between "Uplifting" and the slogan */
+  opacity: 0.9; /* Slight transparency for a soft touch */
+  letter-spacing: 1.5px; /* Space between letters for clarity */
+}
+
+/* Logo container */
+.sidebar .logo {
+  width: 80%; /* Logo width */
+  margin-bottom: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar .logo img {
+  width: 100%; /* Make logo fully responsive */
+  height: auto;
+  object-fit: contain; /* Maintain aspect ratio */
+  transition: transform 0.3s;
+}
+
+
