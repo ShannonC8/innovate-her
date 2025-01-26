@@ -194,7 +194,7 @@ def gen_frames():
                     text = 'Smiling!'
                     font = cv.FONT_HERSHEY_COMPLEX
                     scale = 1.5
-                    color = (0, 255, 0)  # Green color
+                    color = (246, 71, 144)  # Green color
                     thickness = 3
                     
                     (w, h), _ = cv.getTextSize(text, font, scale, thickness)
@@ -334,6 +334,27 @@ def delete_todo(task_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
+@app.route('/api/generate-quote', methods=['GET'])
+def generate_quote():
+    try:
+        system_prompt = "You are an inspiring coach. Generate a short, positive, and uplifting quote that motivates people to have a great day. Do not include anything unrelated to the quote and ensure the quote is very short"
+
+        response = groq_client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": system_prompt}
+            ],
+            model="llama-3.3-70b-versatile",
+            temperature=0.7,
+            max_completion_tokens=30,
+            stream=False
+        )
+
+        quote = response.choices[0].message.content.strip()
+
+        return jsonify({"quote": quote})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
