@@ -31,8 +31,8 @@
   
   /* Main title, scaled down */
   .main-title {
-    font-size: 2vw;  /* Decreased font size */
-    font-weight: 700;
+    font-size: 2.5vw;  /* Decreased font size */
+    font-weight: 900;
     color: #d93f42;
     margin-bottom: 1.5vh;  /* Decreased margin */
     word-wrap: break-word;
@@ -40,11 +40,11 @@
   
   /* Motivational text, decreased font size */
   .motivational-text {
-    font-size: 1vw;  /* Decreased font size */
+    font-size: 1.5vw;  /* Decreased font size */
     color: #555;
-    margin-bottom: 4vh;  /* Decreased bottom margin */
+    margin-bottom: 2vh;  /* Decreased bottom margin */
     font-style: italic;
-    max-width: 75%;  /* Reduced max-width for text to prevent it from stretching too far */
+    
   }
   
   /* Subheading text size */
@@ -52,7 +52,7 @@
     font-size: 2.5vw;  /* Reduced font size */
     font-weight: 600;
     color: #333;
-    margin-bottom: 2.5vh;  /* Adjusted margin */
+    margin-bottom: 2vh;  /* Adjusted margin */
   }
   
   /* Video section, smaller than before */
@@ -71,6 +71,8 @@
   .video-section {
     display: flex;
     justify-content: center;
+    height:60vh;
+    width:auto;
     margin-bottom: 3vh;  /* Adjusted space below the video */
   }
   
@@ -81,10 +83,10 @@
   }
   
   .footer-text {
+    padding-top: 0.4vh;
     top: 1vh;
-    font-size: 2vw;  /* Decreased font size */
+    font-size: 1.5vw;  /* Decreased font size */
     color: #811949;
-    font-weight: 600;
-    font-weight: 300;
+    font-weight: 800;
   }
   
