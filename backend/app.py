@@ -16,6 +16,15 @@ import numpy as np
 from imutils import face_utils
 from flask import Flask, Response
 import time
+import os
+from dotenv import load_dotenv
+from groq import Groq
+
+# Load environment variables from .env file
+load_dotenv()
+
+api_key = os.getenv("GROQ_API_KEY")
+groq_client = Groq(api_key=api_key)
 
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
@@ -216,6 +225,33 @@ def gen_frames():
 def video_feed():
     return Response(gen_frames(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/complete', methods=['POST'])
+def complete_string():
+    user_input = request.json.get("input", "")
+
+    if not user_input:
+        return jsonify({"error": "Input string is required"}), 400
+
+    try:
+        response = groq_client.chat.completions.create(
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": user_input},
+            ],
+            model="llama-3.3-70b-versatile",  # You can change the model as needed
+            temperature=0.7,
+            max_completion_tokens=100,
+            stream=False
+        )
+        
+        # Return the completed text in the response
+        return jsonify({
+            "completed_text": response.choices[0].message.content
+        })
+    
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == "__main__":

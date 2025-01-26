@@ -6,12 +6,14 @@ import SignupPage from "./Signup/SignupPage";
 import PeriodTracker from "./PeriodTracker/PeriodTracker"
 import { UserProvider } from "./UserContext";
 import Smile from "./Smile/Smile"
+import ToDo from "./ToDo/ToDo"
 
 function App() {
   return (
     <UserProvider> 
       <Router>
         <Routes>
+          <Route path="/todo" element={<ToDo/>}/>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/calender" element={<PeriodTracker/>} />
