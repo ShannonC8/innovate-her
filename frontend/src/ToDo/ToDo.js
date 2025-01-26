@@ -131,7 +131,7 @@ const ToDo = () => {
     <div className="todo-app">
       {/* User's Todo Input */}
       <div className="todo-user-list">
-        <h2>Your To-Dos</h2>
+        <h2>Add Items</h2>
         <div className="add-todo">
           <input
             type="text"

@@ -1,10 +1,5 @@
 /* Global Styling */
-/*body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #f7f9fc;
-    margin: 0;
-    padding: 0;
-  }*/
+
   body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     background-image: url('../images/pink_checkered.jpg');  /* Replace with your image URL */
@@ -29,7 +24,7 @@
   
   h2 {
     font-size: 1.8em;
-    color: #5A4B81;  /* Dark Violet */
+    color: #623054;  /* Dark Violet */
     margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -71,6 +66,7 @@
     padding: 12px 20px;
     border: none;
     border-radius: 20px;
+    width: auto;
     cursor: pointer;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -80,7 +76,10 @@
     background-color: #6FD3C4;  /* Muted Teal */
     transform: translateY(-3px);
   }
-  
+  .ai-suggestions {
+    overflow-y: auto;
+    width: 20vw;
+  }
   .ai-suggestions ul, ai-suggestions ul {
     list-style: none;
     padding: 0;
@@ -109,16 +108,15 @@
   }
   
   li button {
-    background-color: #E74C3C;  /* Red for delete button */
+    background-color: #74084b;  /* Red for delete button */
     color: white;
-    font-size: 1.2em;
-    padding: 6px 12px;
+    font-size: 0.4em;  /* Increase font size */
+    padding: 3px;  /* Adjust button size */
     border: none;
     border-radius: 50%;
-    width: 35px;
-    height: 35px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    align-self: flex-end;  /* Right-align the button */
   }
   
   li button:hover {
@@ -150,16 +148,20 @@
   }
   
   .todo-main-list ul {
-    gap: 15px;
+    gap: 5px;
   }
   
   .todo-main-list li {
-    padding: 15px;
+    align-items: center;
+    text-justify: auto;
+    margin-bottom: 10px;
+    padding: 3px;  
     border-radius: 10px;
     background-color: #D6BBFC; /* Soft Lavender */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;  /* Add gap between elements inside the list item */
     transition: background-color 0.2s ease;
   }
   
@@ -167,13 +169,33 @@
     background-color: #6FD3C4; /* Muted Teal */
     transform: translateY(-3px);
   }
+ 
+  .ai-suggestions li {
+    background-color: #6FD3C4;
+    margin-bottom: 5px;
+    padding: 5px;  
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    word-wrap: break-word;  /* Wrap long words if needed */
+    transition: background-color 0.2s ease;
+    overflow: hidden; /* Ensure content does not overflow */
+}
   
   .ai-suggestions button {
-    padding: 8px 16px;
-    background-color: #FFD1DC; /* Blush Pink */
+    margin-bottom: 12px;
+    width:100%;
+    padding: 10px 16px;
+    background-color: #D4F8E8; 
     color: #5A4B81;
     border-radius: 12px;
-  }
+    font-size: 1em; /* Adjust to a suitable size */
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Ensure text fits if too long */
+    }
   
   .ai-suggestions button:hover {
     background-color: #D4F8E8;  /* Mint Green */
@@ -184,7 +206,7 @@
     display: flex;
     flex-direction: row;
     gap: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
   
   .prompt input {
@@ -231,7 +253,7 @@
     }
   
     .todo-user-list, .ai-suggestions, .todo-main-list {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       border-right: none;
       border-bottom: 1px solid #DDD;
     }
