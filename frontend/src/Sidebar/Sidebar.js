@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Spline from '@splinetool/react-spline/next';
+import Spline from '@splinetool/react-spline';
 import './Sidebar.css'; // Add styling in a separate CSS file if needed
 import logo from './logo.png'
 
