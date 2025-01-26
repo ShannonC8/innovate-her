@@ -15,6 +15,7 @@ const Sidebar = () => {
         <li><Link to="/smile">Smile</Link></li>
       </ul>
       {/* Spline mascot */}
+      {/* require npm install @splinetool/react-spline @splinetool/runtime */}
       <div className="spline-container">
       <Spline scene="https://prod.spline.design/nHB6VGUdXILVR-YO/scene.splinecode" />
       </div>
