@@ -1,131 +1,107 @@
-/* Sidebar styling */
+/* General Sidebar styling */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh; /* Full viewport height */
-  width: 16vh; /* Set initial width based on viewport height */
-  background-color: #3d2b61; /* Softer yet bold purple */
+  width: 8vw; /* Sidebar width */
+  background-color: #3d2b61; /* Softer purple */
   color: white;
-  padding-top: 2vh; /* Adjusted top padding for space */
+  font-size: 3vw;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center align the content */
-  box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+  align-items: center;
+  box-shadow: 5px 0px 15px rgba(0, 0, 0, 0); /* Shadow effect */
   transition: width 0.3s ease, background-color 0.3s ease;
+  
 }
 
-/* Add a logo container - Make it more specific */
+/* Logo container */
 .sidebar .logo {
-  width: 80%; /* Adjust width of logo */
-  height: auto; /* Set height to auto to maintain aspect ratio */
-  margin-bottom: 2vh; /* Space between logo and links in viewport units */
+  width: 80%; /* Logo width */
+  margin-bottom: 2vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Styling for the logo image */
 .sidebar .logo img {
-  max-height: 100%; /* Ensure the logo fits within the container */
-  width: auto;
+  width: 100%; /* Make logo fully responsive */
+  height: auto;
   object-fit: contain; /* Maintain aspect ratio */
-  display: block; /* Ensure image is block level */
-  margin: 0; /* Reset margin to avoid any inherited spacing */
+  transition: transform 0.3s;
 }
 
-/* Hover effect for sidebar */
-.sidebar:hover {
-  width: 16vh; /* Sidebar expands slightly on hover */
-  background-color: #3d2b61; /* Slightly darker purple */
+.sidebar .logo img:hover {
+  transform: scale(1.1); /* Slight hover zoom */
 }
 
-/* Styling for the unordered list in the sidebar */
-.sidebar > ul {
-  width: 100%;
-  list-style-type: none;
+/* Navigation menu */
+.sidebar ul {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); /* Shadow effect */
+  background-color: #3d2b61;
+  width: 100%; /* Ensure full width usage */
+  list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-/* Styling for each list item */
-.sidebar > ul > li {
-  width: 100%;
-  margin: 2vh 0; /* Vertical margin for links */
-  text-align: center; /* Center align links */
+.sidebar ul li {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); /* Shadow effect */
+  background-color: #3d2b61;
+  padding-left: 0.2vw;
+  margin: 1.5vh 0; /* Add spacing between links */
+  text-align: left; /* Center-align link text */
+  width: 100%; /* Ensure list item fills sidebar width */
   position: relative;
-  white-space: nowrap; /* Prevent text wrapping */
 }
 
-/* Styling for the links inside the sidebar */
-.sidebar a {
-  text-decoration: none;
-  color: #f2f2f2; /* Light gray color for text */
-  font-size: 1.2rem; /* Relative font size for better scalability */
+.sidebar ul li a {
+  display: block; /* Ensures clickable space covers the entire area */
+  padding: 1.5vh 0.5vw; /* Adjust padding for better alignment */
+  text-decoration: none; /* Remove underline */
+  font-size: 1rem; /* Appropriately scale text */
   font-weight: 600;
-  padding: 1.5vh 2vw; /* Padding in viewport units */
-  display: block;
-  transition: background-color 0.4s, color 0.4s, transform 0.3s;
-  text-align: center; /* Center text in links */
-  white-space: nowrap; /* Prevent text from wrapping */
+  color: #f2f2f2; /* Light gray text */
+  overflow: hidden;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Hover effect for links */
-.sidebar a:hover {
-  background-color: #5a3e8c;
-  transform: translateX(10px);
+.sidebar ul li a:hover {
+  background-color: #5a3e8c; /* Highlight on hover */
+  transform: translateX(5px); /* Slight shift to the right */
+  color: white;
+  border-radius: 8px; /* Slightly round corners */
 }
 
-/* Active link styling */
-.sidebar a.active {
-  background-color: #6e4a8c; /* More vibrant active link background */
-  color: #5a3e8c; /* Light color for active link */
+/* Hover effect for Sidebar */
+.sidebar:hover {
+  width: 12vw; /* Expand on hover */
 }
 
-/* App container for sidebar + content */
-.app-container {
-  display: flex;
-  transition: margin-left 0.3s ease;
+.sidebar:hover ul li a {
+  padding: 1.5vh 1vw; /* Adjust padding for hover */
+  font-size: 1.1rem; /* Scale font slightly */
 }
 
-/* Content styling */
-.content {
-  margin-left: 10vh; /* Content pushed to the right of the sidebar */
-  padding: 2vh 4vw; /* Responsive padding for content */
-  width: 100%;
-  transition: margin-left 0.3s ease;
-}
-
-/* Optional: Responsiveness for smaller screens */
+/* Responsive Design */
 @media (max-width: 768px) {
   .sidebar {
-    width: 15vh; /* Collapsed sidebar width on mobile */
+    width: 15vh; /* Reduce sidebar size */
   }
 
-  .sidebar a {
-    font-size: 1rem; /* Smaller font size for mobile */
-    padding: 2vh 4vw;
-  }
-
-  .content {
-    margin-left: 15vh; /* Adjust content for collapsed sidebar */
+  .sidebar ul li a {
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
   .sidebar {
-    width: 12vh; /* Adjust width for very small screens */
+    width: 12vh;
   }
 
-  .sidebar a {
-    font-size: 0.9rem; /* Font size adjusted for very small screens */
-    padding: 1.5vh 3vw;
-  }
-
-  .content {
-    margin-left: 12vh; /* Adjust content for smaller sidebar */
+  .sidebar ul li a {
+    font-size: 0.8rem;
+    padding: 1vh 1vw;
   }
 }
