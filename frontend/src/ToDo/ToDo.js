@@ -148,6 +148,22 @@ const ToDo = () => {
         </div>
       </div>
 
+      {/* User's To-Do List */}
+      <div className="todo-main-list">
+        <h2>To-Do List</h2>
+        <ul>
+          {userTodos.map((todo, index) => (
+            <li key={index}>
+              <button onClick={() => deleteTodo(todo.taskId)}>X</button> {/* X for deleting the todo */}
+              <strong>{todo.title}</strong>
+              {todo.description && <p>{todo.description}</p>}
+
+              
+            </li>
+          ))}
+        </ul>
+      </div>
+
       {/* AI Suggestions */}
       <div className="ai-suggestions">
         <h2>AI Suggestions</h2>
@@ -173,19 +189,7 @@ const ToDo = () => {
         </ul>
       </div>
 
-      {/* User's To-Do List */}
-      <div className="todo-main-list">
-        <h2>To-Do List</h2>
-        <ul>
-          {userTodos.map((todo, index) => (
-            <li key={index}>
-              <strong>{todo.title}</strong>
-              {todo.description && <p>{todo.description}</p>}
-              <button onClick={() => deleteTodo(todo.taskId)}>X</button> {/* X for deleting the todo */}
-            </li>
-          ))}
-        </ul>
-      </div>
+      
     </div>
   );
 };
