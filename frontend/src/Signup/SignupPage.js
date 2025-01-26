@@ -2,14 +2,16 @@ import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import axios from "axios"; 
+import { useUser} from "../UserContext"; 
 import './SignupPage.css'; 
 
 
 function SignupPage() {
   const [email, setEmail] = useState("");
+  const { userId, setUser, setUserName } = useUser();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [userName, setUserName] = useState("")
+  const [userName, setUsername] = useState("")
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -22,7 +24,7 @@ function SignupPage() {
     } else if (name === "confirmPassword") {
       setConfirmPassword(value);
     } else if (name == "userName") {
-      setUserName(value);
+      setUsername(value);
     }
   };
 
@@ -43,7 +45,9 @@ function SignupPage() {
         userName,
       });
       console.log(response.data); 
-      navigate("/login");
+      setUser(response.data.user_id);
+      setUserName(response.data.user_name);
+      navigate("/welcome");
     } catch (err) {
       console.error(err);
       setError("Failed to sign up. Please check your credentials.");
@@ -54,7 +58,7 @@ function SignupPage() {
     <div className="signup-page">
       <div className="signup-container">
         <h2 className="signup-title">Create an Account</h2>
-        <p className="signup-subtitle">Join FitHer for your health and fitness journey!</p>
+        <p className="signup-subtitle">Join Uplift for your health and fitness journey!</p>
         {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
         <div className="input-container">

@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import './Smile.css'; // Import the CSS file for styling
+import { useUser} from "../UserContext"; 
 
 const Smile = () => {
   const [quote, setQuote] = useState('Loading your motivational quote...');
+  const { userId, setUser, setUserName } = useUser();
 
   useEffect(() => {
     // Fetch the quote from the backend
     const fetchQuote = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/api/generate-quote');
+        console.log(userId)
+        const response = await fetch(`http://127.0.0.1:5000/api/generate-quote?user_id=${userId}`, {
+          method: 'GET', 
+        });
         const data = await response.json();
         if (response.ok) {
           setQuote(data.quote);
         } else {
-          setQuote('Sorry, something went wrong. Please try again later.');
+          setQuote('Smile :)');
         }
       } catch (error) {
-        setQuote('Sorry, something went wrong. Please try again later.');
+        setQuote('Smile :)');
       }
     };
 

@@ -6,7 +6,7 @@
   background-repeat: repeat;
   background-position: top left; 
   height: 100vh;
-  width: 200vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;

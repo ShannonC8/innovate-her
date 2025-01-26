@@ -153,7 +153,8 @@ def signup():
         "email": email,  # Store the email
         "password": password,  # Store the password
         "user_id": user_id,  # Store the user_id
-        "user_name": userName
+        "user_name": userName,
+        "other_info": ""
     })
 
     return jsonify({
@@ -235,13 +236,17 @@ def complete_string():
         return jsonify({"error": "Input string and userId are required"}), 400
 
     try:
-        
-        # Retrieve last three calendar entries
         calendar_query = db.collection("calendarData").where("user_id", "==", user_id).limit(3)
-        
-        
         calendar_docs = list(calendar_query.get())
         
+        # Retrieve user's additional info (like "other_info")
+        user_ref = db.collection("users").document(user_id)
+        user_doc = user_ref.get()
+        if not user_doc.exists:
+            return jsonify({"error": "User not found"}), 404
+        user_data = user_doc.to_dict()
+        other_info = user_data.get("other_info", "")
+
         # Prepare context from calendar entries
         calendar_context = ""
         if calendar_docs:
@@ -249,13 +254,13 @@ def complete_string():
                 calendar_data = doc.to_dict()
                 calendar_context += f"Date: {calendar_data.get('date', 'N/A')}, Mood: {calendar_data.get('mood', 'N/A')}, Notes: {calendar_data.get('notes', 'N/A')}. "
         
-        
     
         # Modify prompt based on calendar context availability
         system_prompt = (
-            "You are a planner generating personalized tasks. "
+            "You are a planner generating personalized tasks. Format as title:description+title:description+title:description. Make the description a short sentence and do not write anything else."
             + ("Use the user's recent calendar context to create relevant todo items. " if calendar_docs else "")
-            + "Generate exactly three tasks, formatted as title:description+title:description+title:description. make the description a short sentance and do not write anything else"
+            + "Use the user's additional context: " + other_info + " "
+            + "Generate exactly three tasks, formatted as title:description+title:description+title:description. Make the description a short sentence and do not write anything else."
         )
 
         full_prompt = f"Context from recent calendar entries: {calendar_context}. User request: {user_input}"
@@ -266,7 +271,7 @@ def complete_string():
                 {"role": "user", "content": full_prompt},
             ],
             model="llama-3.3-70b-versatile",
-            temperature=0.7,
+            temperature=0.9,
             max_completion_tokens=150,
             stream=False
         )
@@ -278,7 +283,6 @@ def complete_string():
         formatted_tasks = []
         for task in tasks:
             if ':' in task:
-                
                 title, description = task.split(":", 1)
                 formatted_tasks.append({
                     'title': title.strip(),
@@ -334,12 +338,31 @@ def delete_todo(task_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
 @app.route('/api/generate-quote', methods=['GET'])
 def generate_quote():
     try:
-        system_prompt = "You are an inspiring coach. Generate a short, positive, and uplifting quote that motivates people to have a great day. Do not include anything unrelated to the quote and ensure the quote is very short"
+        user_id = request.args.get("user_id")
 
+        # Ensure the user ID is provided
+        if not user_id:
+            return jsonify({"error": "User ID is required"}), 400
+
+        # Retrieve user's additional info (like "other_info")
+        user_ref = db.collection("users").document(user_id)
+        user_doc = user_ref.get()
+        if not user_doc.exists:
+            return jsonify({"error": "User not found"}), 404
+        user_data = user_doc.to_dict()
+        other_info = user_data.get("other_info", "")
+
+        # Prepare the system prompt for generating an inspirational quote
+        system_prompt = (
+            "Generate a short, positive, and uplifting quote that motivates the user to have a great day. "
+            + (f"User's additional context: {other_info}" if other_info else "")
+            +"Make sure the quote is very short. "
+        )
+
+        # Generate the quote using the Groq API
         response = groq_client.chat.completions.create(
             messages=[
                 {"role": "system", "content": system_prompt}
@@ -353,8 +376,43 @@ def generate_quote():
         quote = response.choices[0].message.content.strip()
 
         return jsonify({"quote": quote})
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+    
+
+@app.route("/api/user-answers", methods=["POST"])
+def save_user_answers():
+    try:
+        # Get data from the incoming request
+        data = request.get_json()
+        user_id = data.get("user_id")
+        other_point = data.get("answer")  # New point of data
+
+        if not user_id:
+            return jsonify({"error": "User ID is required"}), 400
+
+        # Check if the user exists
+        user_ref = db.collection("users").document(user_id)
+        user_doc = user_ref.get()
+
+        if not user_doc.exists:
+            return jsonify({"error": "User not found"}), 404
+
+        # Update the user's document with the new data or "otherPoint"
+        user_data = user_doc.to_dict()
+        user_data["other_info"] = other_point  # Store the 'other_point'
+
+        # Save data back to the user's document
+        user_ref.update(user_data)
+
+        return jsonify({"message": "Data stored successfully", "user_id": user_id}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
