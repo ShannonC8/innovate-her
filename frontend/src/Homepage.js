@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './WellcomePage.css'; // Import the CSS file
+import './Homepage.css'; // Import the CSS file
 import logo from './logo.png'; // Import the logo image
 
 const MainPage = () => {
