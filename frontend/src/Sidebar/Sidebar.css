@@ -105,3 +105,19 @@
     padding: 1vh 1vw;
   }
 }
+
+/* Spline container */
+.spline-container {
+  position: absolute;
+  bottom: 2vh; /* Adjust spacing from the bottom */
+  left: 0;
+  width: 100%; /* Take full sidebar width */
+  display: flex;
+  justify-content: center; /* Center the mascot horizontally */
+  align-items: center;
+}
+
+.spline-container canvas {
+  width: 80%; /* Adjust size of the mascot */
+  height: auto; /* Maintain aspect ratio */
+}
