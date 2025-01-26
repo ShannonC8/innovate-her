@@ -55,6 +55,23 @@ const ToDo = () => {
     }
   };
 
+  const deleteTodo = async (taskId) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/todos/${taskId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // Update the UI by removing the deleted todo
+        setUserTodos(userTodos.filter(todo => todo.taskId !== taskId));
+      } else {
+        console.error('Error deleting to-do');
+      }
+    } catch (error) {
+      console.error('Error deleting to-do:', error);
+    }
+  };
+
   const generateAiSuggestions = async () => {
     if (!prompt.trim()) return;
   
@@ -164,6 +181,7 @@ const ToDo = () => {
             <li key={index}>
               <strong>{todo.title}</strong>
               {todo.description && <p>{todo.description}</p>}
+              <button onClick={() => deleteTodo(todo.taskId)}>X</button> {/* X for deleting the todo */}
             </li>
           ))}
         </ul>

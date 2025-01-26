@@ -325,6 +325,15 @@ def get_todos(user_id):
     todos = [doc.to_dict() for doc in docs]
     return jsonify(todos), 200
 
+@app.route('/api/todos/<task_id>', methods=['DELETE'])
+def delete_todo(task_id):
+    try:
+        todo_ref = db.collection('ToDoItems').document(task_id)
+        todo_ref.delete()  # Delete the to-do item
+        
+        return jsonify({'message': 'To-Do deleted successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 if __name__ == "__main__":
