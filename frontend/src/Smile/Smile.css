@@ -14,7 +14,7 @@
     align-items: center;
     height: 100vh;  /* Full height of the screen */
     width: 100vw;
-    background: linear-gradient(to right, #FFC0CB, #FFB6C1); /* Soft pink gradient */
+    background: url("bgsmile.jpg"); /* image */
     text-align: center;
     color: #333;
     padding: 2vw;  /* Decreased padding to reduce spacing */
