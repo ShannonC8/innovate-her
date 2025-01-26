@@ -108,16 +108,17 @@
 
 /* Spline container */
 .spline-container {
-  position: absolute;
-  bottom: 2vh; /* Adjust spacing from the bottom */
+  position: fixed;
+  bottom: 0vh; /* Adjust spacing from the bottom */
   left: 0;
-  width: 100%; /* Take full sidebar width */
+  width: 40vw; /* Take full sidebar width */
   display: flex;
-  justify-content: center; /* Center the mascot horizontally */
+  justify-content: flex-end; /* Center the mascot horizontally */
   align-items: center;
 }
 
-.spline-container canvas {
-  width: 80%; /* Adjust size of the mascot */
+.spline-container Spline {
+  justify-content: flex-end;
+  width: 25vw; /* Adjust size of the mascot */
   height: auto; /* Maintain aspect ratio */
 }

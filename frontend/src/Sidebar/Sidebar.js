@@ -17,7 +17,7 @@ const Sidebar = () => {
       {/* Spline mascot */}
       {/* require npm install @splinetool/react-spline @splinetool/runtime */}
       <div className="spline-container">
-      <Spline scene="https://prod.spline.design/nHB6VGUdXILVR-YO/scene.splinecode" />
+      <Spline scale={[1,1,1]} scene="https://prod.spline.design/nHB6VGUdXILVR-YO/scene.splinecode" />
       </div>
     </div>
   );
