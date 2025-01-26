@@ -255,7 +255,7 @@ def complete_string():
         system_prompt = (
             "You are a planner generating personalized tasks. "
             + ("Use the user's recent calendar context to create relevant todo items. " if calendar_docs else "")
-            + "Generate exactly three tasks, formatted as title:description+title:description+title:description. Do not write anything else"
+            + "Generate exactly three tasks, formatted as title:description+title:description+title:description. make the description a short sentance and do not write anything else"
         )
 
         full_prompt = f"Context from recent calendar entries: {calendar_context}. User request: {user_input}"
@@ -278,11 +278,11 @@ def complete_string():
         formatted_tasks = []
         for task in tasks:
             if ':' in task:
-                task.replace(":","")
+                
                 title, description = task.split(":", 1)
                 formatted_tasks.append({
                     'title': title.strip(),
-                    'description': description.strip()
+                    'description': description.strip().replace(":","")
                 })
 
         return jsonify({

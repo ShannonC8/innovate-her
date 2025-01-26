@@ -131,7 +131,7 @@ const ToDo = () => {
     <div className="todo-app">
       {/* User's Todo Input */}
       <div className="todo-user-list">
-        <h2>Your To-Dos</h2>
+        <h2>Add Items</h2>
         <div className="add-todo">
           <input
             type="text"
@@ -146,6 +146,22 @@ const ToDo = () => {
           />
           <button onClick={addUserTodo}>Add</button>
         </div>
+      </div>
+
+      {/* User's To-Do List */}
+      <div className="todo-main-list">
+        <h2>To-Do List</h2>
+        <ul>
+          {userTodos.map((todo, index) => (
+            <li key={index}>
+              <button onClick={() => deleteTodo(todo.taskId)}>X</button> {/* X for deleting the todo */}
+              <strong>{todo.title}</strong>
+              {todo.description && <p>{todo.description}</p>}
+
+              
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* AI Suggestions */}
@@ -173,19 +189,7 @@ const ToDo = () => {
         </ul>
       </div>
 
-      {/* User's To-Do List */}
-      <div className="todo-main-list">
-        <h2>To-Do List</h2>
-        <ul>
-          {userTodos.map((todo, index) => (
-            <li key={index}>
-              <strong>{todo.title}</strong>
-              {todo.description && <p>{todo.description}</p>}
-              <button onClick={() => deleteTodo(todo.taskId)}>X</button> {/* X for deleting the todo */}
-            </li>
-          ))}
-        </ul>
-      </div>
+      
     </div>
   );
 };
