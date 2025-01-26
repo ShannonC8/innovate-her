@@ -226,32 +226,105 @@ def video_feed():
     return Response(gen_frames(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/complete', methods=['POST'])
+@app.route('/api/generate-todos', methods=['POST'])
 def complete_string():
     user_input = request.json.get("input", "")
+    user_id = request.json.get("user_id", "")
 
-    if not user_input:
-        return jsonify({"error": "Input string is required"}), 400
+    if not user_input or not user_id:
+        return jsonify({"error": "Input string and userId are required"}), 400
 
     try:
+        
+        # Retrieve last three calendar entries
+        calendar_query = db.collection("calendarData").where("user_id", "==", user_id).limit(3)
+        
+        
+        calendar_docs = list(calendar_query.get())
+        
+        # Prepare context from calendar entries
+        calendar_context = ""
+        if calendar_docs:
+            for doc in calendar_docs:
+                calendar_data = doc.to_dict()
+                calendar_context += f"Date: {calendar_data.get('date', 'N/A')}, Mood: {calendar_data.get('mood', 'N/A')}, Notes: {calendar_data.get('notes', 'N/A')}. "
+        
+        
+    
+        # Modify prompt based on calendar context availability
+        system_prompt = (
+            "You are a planner generating personalized tasks. "
+            + ("Use the user's recent calendar context to create relevant todo items. " if calendar_docs else "")
+            + "Generate exactly three tasks, formatted as title:description+title:description+title:description. Do not write anything else"
+        )
+
+        full_prompt = f"Context from recent calendar entries: {calendar_context}. User request: {user_input}"
+
         response = groq_client.chat.completions.create(
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": user_input},
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": full_prompt},
             ],
-            model="llama-3.3-70b-versatile",  # You can change the model as needed
+            model="llama-3.3-70b-versatile",
             temperature=0.7,
-            max_completion_tokens=100,
+            max_completion_tokens=150,
             stream=False
         )
-        
-        # Return the completed text in the response
+
+        # Process tasks 
+        tasks_text = response.choices[0].message.content
+
+        tasks = tasks_text.split("+")[:3]
+
+        formatted_tasks = []
+        for task in tasks:
+            if ':' in task:
+                task.replace(":","")
+                title, description = task.split(":", 1)
+                formatted_tasks.append({
+                    'title': title.strip(),
+                    'description': description.strip()
+                })
+
         return jsonify({
-            "completed_text": response.choices[0].message.content
+            "todos": formatted_tasks
         })
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/todos', methods=['POST'])
+def add_todo():
+    data = request.get_json()
+    user_id = data.get('userId')
+    title = data.get('title')
+    description = data.get('description')
+
+    if not user_id or not title:
+        return jsonify({'error': 'userId and title are required'}), 400
+
+    # Generate a unique task ID
+    task_id = str(uuid.uuid4())
+
+    # Save the to-do item
+    db.collection("ToDoItems").document(task_id).set({
+        'userId': user_id,
+        'title': title,
+        'description': description,
+        'taskId': task_id
+    })
+
+    return jsonify({'message': 'To-Do added successfully', 'taskId': task_id}), 201
+
+
+@app.route('/api/todos/<user_id>', methods=['GET'])
+def get_todos(user_id):
+    todos_ref = db.collection("ToDoItems").where("userId", "==", user_id)
+    docs = todos_ref.get()
+    todos = [doc.to_dict() for doc in docs]
+    return jsonify(todos), 200
+
 
 
 if __name__ == "__main__":

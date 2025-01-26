@@ -34,7 +34,7 @@ function LoginPage() {
       console.log(response.data); 
       setUser(response.data.user_id);
       setUserName(response.data.user_name);
-      navigate("/calender");
+      navigate("/todo");
     } catch (err) {
       console.error(err);
       setError("Failed to log in. Please check your credentials.");
