@@ -1,46 +1,109 @@
-/* Sidebar.css */
+/* Sidebar styling */
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 10vw;
-    background-color: #8876bb;
-    color: white;
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 10vw; /* Set width for a slightly bigger sidebar */
+  background-color: #3d2b61; /* Softer yet bold purple */
+  color: white;
+  padding-top: 20px; /* Adjusted top padding for space */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align the content */
+  box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+/* Add a logo container */
+.sidebar .logo {
+  width: 80%; /* Adjust width of logo */
+  height: 60px; /* Set fixed height for the logo */
+  margin-bottom: 20px; /* Space between logo and links */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling for the logo image */
+.sidebar .logo img {
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Hover effect for sidebar */
+.sidebar:hover {
+  width: 12vw; /* Sidebar expands even more on hover */
+  background-color: #3d2b61; /* Slightly darker purple */
+}
+
+/* Styling for the unordered list in the sidebar */
+.sidebar ul {
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Styling for each list item */
+.sidebar li {
+  width: 100%;
+  margin: 25px 0;
+  text-align: center; /* Center align links */
+  position: relative;
+}
+
+/* Styling for the links inside the sidebar */
+.sidebar a {
+  text-decoration: none;
+  color: #f2f2f2; /* Light gray color for text */
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 25px;
+  display: block;
+  transition: background-color 0.4s, color 0.4s, transform 0.3s;
+}
+
+/* Hover effect for links */
+.sidebar a:hover {
+  color: white;
+  background-color: #5a3e8c;
+  transform: translateX(10px);
+}
+
+/* Active link styling */
+.sidebar a.active {
+  background-color: #6e4a8c; /* A more vibrant active link background */
+  color: #e0e0e0; /* Light color for active link */
+}
+
+/* App container for sidebar + content */
+.app-container {
+  display: flex;
+  transition: margin-left 0.3s ease;
+}
+
+/* Content styling */
+.content {
+  margin-left: 250px; /* Content pushed to the right */
+  padding: 20px;
+  width: 100%;
+  transition: margin-left 0.3s ease;
+}
+
+/* Optional: Responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 70px; /* Collapsed width on mobile */
   }
-  
-  .sidebar ul {
-    width: 8vw;
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    margin: 15px 0;
-  }
-  
+
   .sidebar a {
-    text-decoration: none;
-    color: rgb(129, 89, 165);
-    
     font-size: 14px;
+    padding: 8px 15px;
   }
-  
-  .sidebar a:hover {
-    color: #f1f1f1;
-  }
-  
-  .app-container {
-    display: flex;
-  }
-  
+
   .content {
-    margin-left: 10vw; /* Ensure the content is pushed right */
-    padding: 20px;
-    width: 100%;
+    margin-left: 70px; /* Adjust content for collapsed sidebar */
   }
-  
+}
