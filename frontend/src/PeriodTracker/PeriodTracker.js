@@ -80,9 +80,10 @@ const PeriodTracker = ({ userEmail }) => {
         <div className="details-card">
           <div className="card-content">
             <h2 className="details-title">Details for {selectedDate.toDateString()}</h2>
-            <label className="form-label">
-              On Period:  
+            <label className="form-label" id="periodbar">
+              <span id="period-label">On Period:</span>  
               <input
+                id = "periodday"
                 type="checkbox"
                 checked={isOnPeriod}
                 onChange={(e) => setIsOnPeriod(e.target.checked)}
